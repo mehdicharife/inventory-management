@@ -35,6 +35,7 @@ public class ProductController {
     @Autowired
     private UserRepository repo;
 
+    /* 
     @PostMapping
     public ResponseEntity<Long> createProduct(@RequestBody Product prd)
         throws ProductAlreadyExists, ProductValidationException {
@@ -74,6 +75,7 @@ public class ProductController {
         Product saved = productRepository.save(prd);
         return new ResponseEntity<>(saved.getProductId(), HttpStatus.CREATED);
     }
+    */
 
     @GetMapping("/list")
     public ResponseEntity<List<Product>> listProducts() {

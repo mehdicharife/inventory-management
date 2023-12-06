@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -21,13 +20,17 @@ public class Supply {
   private Long supplyId;
 
   @ManyToOne
-  @JoinColumn(name = "productId")
-  private Product product;
+  private ProductModel productModel;
 
   private Integer quantity;
 
   @Temporal(TemporalType.TIMESTAMP)
+  private Date expirationDate;
+
+  @Temporal(TemporalType.TIMESTAMP)
   private Date supplyDate;
+
+
 
   public Long getSupplyId() {
     return supplyId;
@@ -37,12 +40,12 @@ public class Supply {
     this.supplyId = supplyId;
   }
 
-  public Product getProduct() {
-    return product;
+  public ProductModel getProductModel() {
+    return productModel;
   }
 
-  public void setProduct(Product product) {
-    this.product = product;
+  public void setProductModel(ProductModel productModel) {
+    this.productModel = productModel;
   }
 
   public Integer getQuantity() {
@@ -51,6 +54,14 @@ public class Supply {
 
   public void setQuantity(Integer addedQuantity) {
     this.quantity = addedQuantity;
+  }
+
+  public Date getExpirationDate() {
+    return this.expirationDate;
+  }
+
+  public void setExpirationDate(Date date) {
+    this.expirationDate = date;
   }
 
   public Date getSupplyDate() {

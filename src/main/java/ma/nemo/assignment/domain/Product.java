@@ -1,14 +1,19 @@
 package ma.nemo.assignment.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
+
+import org.hibernate.annotations.Cascade;
+
 import lombok.ToString;
 
 @Entity
@@ -20,23 +25,21 @@ public class Product {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long productId;
 
-  @Column(unique = true, nullable = false)
-  private String productCode;
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  private ProductModel productModel;
 
-  @Column(nullable = false)
-  private String productName;
+  private Integer quantity;
 
-  private String description;
-
-  private Double unitPrice;
-
-  private Integer quantityInStock;
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date expirationDate;
 
   @Temporal(TemporalType.TIMESTAMP)
   private Date creationDate;
 
   @Temporal(TemporalType.TIMESTAMP)
   private Date modificationDate;
+
+
 
   public Long getProductId() {
     return productId;
@@ -46,44 +49,28 @@ public class Product {
     this.productId = productId;
   }
 
-  public String getProductCode() {
-    return productCode;
+  public ProductModel getProductModel() {
+    return this.productModel;
   }
 
-  public void setProductCode(String productCode) {
-    this.productCode = productCode;
+  public void setProductModel(ProductModel productModel) {
+    this.productModel = productModel;
   }
 
-  public String getProductName() {
-    return productName;
+  public Integer getQuantity() {
+    return quantity;
   }
 
-  public void setProductName(String productName) {
-    this.productName = productName;
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
   }
 
-  public String getDescription() {
-    return description;
+  public Date getExpirationDate() {
+    return this.expirationDate;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Double getUnitPrice() {
-    return unitPrice;
-  }
-
-  public void setUnitPrice(Double unitPrice) {
-    this.unitPrice = unitPrice;
-  }
-
-  public Integer getQuantityInStock() {
-    return quantityInStock;
-  }
-
-  public void setQuantityInStock(Integer quantityInStock) {
-    this.quantityInStock = quantityInStock;
+  public void setExpirationDate(Date expirationDate) {
+    this.expirationDate = expirationDate;
   }
 
   public Date getCreationDate() {
@@ -102,5 +89,5 @@ public class Product {
     this.modificationDate = modificationDate;
   }
 
-  // Getters, setters, etc.
+  
 }

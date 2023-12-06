@@ -1,11 +1,14 @@
 package ma.nemo.assignment.repository;
 
 import ma.nemo.assignment.domain.Product;
+
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
-  Product findByProductCode(String productCode);
+    List<Product> findByExpirationDateBefore(Date date);
 }
