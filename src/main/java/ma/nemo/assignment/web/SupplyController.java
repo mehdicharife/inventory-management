@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ma.nemo.assignment.domain.Supply;
 import ma.nemo.assignment.dto.SupplyDto;
+import ma.nemo.assignment.exceptions.SupplyLargerThan500Exception;
 import ma.nemo.assignment.service.SupplyService;
 
 @RestController
 @RequestMapping("/api/supply")
 public class SupplyController {
+    
 
     private SupplyService supplyService;
     
@@ -25,21 +27,20 @@ public class SupplyController {
     
 
     @PostMapping
-    public ResponseEntity<Supply> addSupply(@RequestBody SupplyDto supplyDto) {
-        Optional<Supply> optionalSupply;
-        if(supplyDto.getExpirationDate() == null) {
-            optionalSupply = this.supplyService.createSupplyWith(supplyDto.getProductCode(), supplyDto.getQuantity());
-        } else {
-            optionalSupply = this.supplyService.createSupplyWith(supplyDto.getProductCode(),
-                supplyDto.getQuantity(),
-                supplyDto.getExpirationDate()
-            );
-        }
+    public ResponseEntity<Object> addSupply(@RequestBody SupplyDto supplyDto) {
+        try {
+            Supply supply = this.supplyService.createSupplyWith(
+                    supplyDto.getProductCode(), 
+                    supplyDto.getQuantity(), 
+                    supplyDto.getExpirationDate()
+                );
+            
+            return new ResponseEntity<>(supply, HttpStatus.CREATED);
+        } 
 
-        if(optionalSupply.isPresent()) {
-            return new ResponseEntity<Supply>(optionalSupply.get(), HttpStatus.OK);
+        catch(SupplyLargerThan500Exception exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
         }
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
     }
 }
