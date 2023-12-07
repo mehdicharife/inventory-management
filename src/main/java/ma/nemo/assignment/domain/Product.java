@@ -17,7 +17,7 @@ import org.hibernate.annotations.Cascade;
 import lombok.ToString;
 
 @Entity
-@Table(name = "Products")
+@Table(name = "Product")
 @ToString
 public class Product {
 

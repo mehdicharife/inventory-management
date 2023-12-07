@@ -45,5 +45,9 @@ public class ProductServiceImpl implements ProductService {
         return this.productRepository.findByExpirationDateBefore(calendar.getTime());
     }
 
+    public long getProductsQuantitySumByProductModel(ProductModel productModel) {
+        return this.productRepository.sumQuantityByProductModel(productModel);
+    }
+
     
 }

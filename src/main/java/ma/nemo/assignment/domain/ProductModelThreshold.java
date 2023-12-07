@@ -1,9 +1,11 @@
 package ma.nemo.assignment.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -14,10 +16,19 @@ public class ProductModelThreshold {
     private Long id;
 
     @OneToOne
+    @JoinColumn(unique = true, nullable = false)
     private ProductModel productModel;
 
     private Integer threshold;
 
+
+    public ProductModelThreshold() {
+
+    }
+
+    public ProductModelThreshold(ProductModel productModel) {
+        this.productModel = productModel;
+    }
 
     public Long getId() {
         return this.id;
