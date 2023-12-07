@@ -20,10 +20,9 @@ public class Sale {
   private Long saleId;
 
   @ManyToOne
-  @JoinColumn(name = "productId")
-  private Product product;
+  private ProductModel productModel;
 
-  private Integer soldQuantity;
+  private long quantity;
 
   private Double totalPrice;
 
@@ -32,7 +31,7 @@ public class Sale {
 
   @ManyToOne
   @JoinColumn(name = "userId")
-  private User user;
+  private User buyer;
 
   public Long getSaleId() {
     return saleId;
@@ -42,20 +41,20 @@ public class Sale {
     this.saleId = saleId;
   }
 
-  public Product getProduct() {
-    return product;
+  public ProductModel getProductModel() {
+    return productModel;
   }
 
-  public void setProduct(Product product) {
-    this.product = product;
+  public void setProductModel(ProductModel productModel) {
+    this.productModel = productModel;
   }
 
-  public Integer getSoldQuantity() {
-    return soldQuantity;
+  public long getQuantity() {
+    return quantity;
   }
 
-  public void setSoldQuantity(Integer soldQuantity) {
-    this.soldQuantity = soldQuantity;
+  public void setQuantity(long quantity) {
+    this.quantity = quantity;
   }
 
   public Double getTotalPrice() {
@@ -74,13 +73,12 @@ public class Sale {
     this.saleDate = saleDate;
   }
 
-  public User getUser() {
-    return user;
+  public User getBuyer() {
+    return buyer;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setBuyer(User buyer) {
+    this.buyer = buyer;
   }
 
-  // Getters, setters, etc.
 }

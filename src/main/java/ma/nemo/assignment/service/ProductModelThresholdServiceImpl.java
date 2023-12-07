@@ -1,5 +1,6 @@
 package ma.nemo.assignment.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,19 +38,17 @@ public class ProductModelThresholdServiceImpl implements ProductModelThresholdSe
     }
 
     public List<ProductModel> getProductModelsBelowThreshold() {
-        List<ProductModel> productModels = this.productModelService.getAllProductModels();
+        List<ProductModelThreshold> productModelThresholds = this.productModelThresholdRepository.findAll();
+        List<ProductModel> productModels = new ArrayList<>();
         
-        for(int i = 0; i < productModels.size(); i++) {
-            Optional<ProductModelThreshold> optionalProductModelThreshold =  this.productModelThresholdRepository.findByProductModel(productModels.get(i));
-            if(!optionalProductModelThreshold.isPresent()) {
-                productModels.remove(i);
-                continue;
-            }
-            ProductModelThreshold currentProductModelThreshold = optionalProductModelThreshold.get();
-            long currentProductModelMinimum = currentProductModelThreshold.getThreshold();
-            long currentProductModelQuantity = this.productService.getProductsQuantitySumByProductModel(currentProductModelThreshold.getProductModel());
-            if(currentProductModelQuantity > currentProductModelMinimum) {
-                productModels.remove(i);
+        for(int i = 0; i < productModelThresholds.size(); i++) {
+            ProductModelThreshold currentProductModelThreshold = productModelThresholds.get(i);
+            ProductModel currentProductModel = currentProductModelThreshold.getProductModel();
+
+            long currentProductModelMin = currentProductModelThreshold.getThreshold();
+            long currentProductModelQuantity = this.productService.getProductsQuantitySumByProductModel(currentProductModel);
+            if(currentProductModelQuantity < currentProductModelMin) {
+                productModels.add(currentProductModel);
             }
         }   
 

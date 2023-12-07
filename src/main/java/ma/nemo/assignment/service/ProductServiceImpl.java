@@ -49,5 +49,31 @@ public class ProductServiceImpl implements ProductService {
         return this.productRepository.sumQuantityByProductModel(productModel);
     }
 
+    public long getProductsQuantitySumByProductCode(String productCode) {
+        return this.productRepository.sumQuantityByProductCode(productCode);
+    }
+    
+
+    public void reduceQuantityByProductCode(String productCode, long quantity) {
+        long quantityInStock = this.getProductsQuantitySumByProductCode(productCode);
+        if(quantity > quantityInStock) {
+            return;
+        }
+        
+        List<Product> products = this.productRepository.findAllByOrderByExpirationDateAsc();
+        long reducedQuantity = 0;
+        for(Product product : products) {
+            if(reducedQuantity == quantity) {
+                break;
+            }
+            long currentProductQuantity = product.getQuantity();
+            long currentReducedQuantity = Math.min(currentProductQuantity, quantity - reducedQuantity);
+            product.setQuantity(currentReducedQuantity);
+            this.productRepository.save(product);
+
+            reducedQuantity += currentReducedQuantity;
+        }
+    }
+
     
 }

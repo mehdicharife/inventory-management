@@ -14,7 +14,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByExpirationDateBefore(Date date);
+
+    @Query("SELECT p FROM Product p WHERE p.productModel.productCode = :#{#productCode}")
+    List<Product> findAllByProductCode(@Param("productCode") String productCode);
     
     @Query("SELECT SUM(quantity) FROM Product p WHERE p.productModel.id = :#{#productModel.id}")
     long sumQuantityByProductModel(@Param("productModel") ProductModel productModel);
+
+    @Query("SELECT SUM(quantity) FROM Product p WHERE p.productModel.productCode = :#{#productCode}")
+    long sumQuantityByProductCode(@Param("productCode") String productCode);
+
+    List<Product> findAllByOrderByExpirationDateAsc();
 }

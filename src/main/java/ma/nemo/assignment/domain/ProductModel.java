@@ -22,7 +22,6 @@ public class ProductModel {
   
     private Double unitPrice;
   
-    private Integer threshold;
 
 
     public Long getId() {
@@ -64,11 +63,4 @@ public class ProductModel {
         this.unitPrice = unitPrice;
     }
 
-    public Integer getThreshold() {
-        return this.threshold;
-    }
-
-    public void setThreshold(Integer threshold) {
-        this.threshold = threshold; 
-    }
 }

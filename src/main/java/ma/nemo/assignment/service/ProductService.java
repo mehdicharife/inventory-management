@@ -15,4 +15,8 @@ public interface ProductService {
 
     long getProductsQuantitySumByProductModel(ProductModel productModel);
 
+    long getProductsQuantitySumByProductCode(String productCode);
+
+    void reduceQuantityByProductCode(String productCode, long quantity);
+
 }
