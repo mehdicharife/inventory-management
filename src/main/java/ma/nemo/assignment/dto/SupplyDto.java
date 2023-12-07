@@ -8,6 +8,15 @@ public class SupplyDto {
     private Integer quantity;
     private Date expirationDate;
 
+    public SupplyDto() {
+
+    }
+
+    public SupplyDto(String productCode, Integer quantity) {
+        this.productCode = productCode;
+        this.quantity = quantity;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
