@@ -4,30 +4,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-public class ProductModelThreshold {
-
+public class ProductReturn {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(unique = true, nullable = false)
+    @ManyToOne
     private ProductModel productModel;
 
-    private Integer threshold;
+    private long quantity;
 
+    private String returnReason;
 
-    public ProductModelThreshold() {
-
-    }
-
-    public ProductModelThreshold(ProductModel productModel) {
-        this.productModel = productModel;
-    }
 
     public Long getId() {
         return this.id;
@@ -36,7 +28,7 @@ public class ProductModelThreshold {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public ProductModel getProductModel() {
         return this.productModel;
     }
@@ -45,11 +37,21 @@ public class ProductModelThreshold {
         this.productModel = productModel;
     }
 
-    public Integer getThreshold() {
-        return this.threshold;
+    public long getQuantity() {
+        return this.quantity;
     }
 
-    public void setThreshold(Integer threshold) {
-        this.threshold = threshold;
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
     }
+
+    public String getReturnReason() {
+        return this.returnReason;
+    }
+
+    public void setReturnReason(String returnReason) {
+        this.returnReason = returnReason;
+    }
+
+
 }

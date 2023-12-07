@@ -20,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product createProductWith(ProductModel productModel, Integer quantity) {
+    public Product createProductWith(ProductModel productModel, long quantity) {
         Product product = new Product();
 
         product.setProductModel(productModel);
@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
         return this.productRepository.save(product);
     }
 
-    public Product createProductWith(ProductModel productModel, Integer quantity, Date expirationDate) {
+    public Product createProductWith(ProductModel productModel, long quantity, Date expirationDate) {
         Product product = new Product();
 
         product.setProductModel(productModel);
