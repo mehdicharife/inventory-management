@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
             }
             long currentProductQuantity = product.getQuantity();
             long currentReducedQuantity = Math.min(currentProductQuantity, quantity - reducedQuantity);
-            product.setQuantity(currentReducedQuantity);
+            product.setQuantity(currentProductQuantity - currentReducedQuantity);
             this.productRepository.save(product);
 
             reducedQuantity += currentReducedQuantity;
