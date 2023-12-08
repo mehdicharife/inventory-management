@@ -24,6 +24,7 @@ import ma.nemo.assignment.web.SupplyController;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import static org.mockito.ArgumentMatchers.*;
 
 
 @WebMvcTest(SupplyController.class)
@@ -41,10 +42,10 @@ public class SupplyControllerTest {
 
     @Test
     public void shouldSendBadRequestStatusCodeWhenServiceThrowsSupplyLargerThan500Exception() throws Exception {
-        SupplyDto supplyDto = new SupplyDto("TestSupply", 200);
+        SupplyDto supplyDto = new SupplyDto();
         
         Mockito.doThrow(new SupplyLargerThan500Exception()).when(supplyService).createSupplyWith(
-            supplyDto.getProductCode(), supplyDto.getQuantity(), supplyDto.getExpirationDate()
+            eq(supplyDto.getProductCode()), eq(supplyDto.getQuantity()), eq(supplyDto.getExpirationDate())
         );
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/supply")
