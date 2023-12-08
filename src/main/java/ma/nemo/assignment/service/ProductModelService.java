@@ -12,4 +12,6 @@ public interface ProductModelService {
     
     ProductModel saveProductModel(ProductModel productModel);
 
+    ProductModel getOrCreateProductModelByProductCode(String productCode);
+
 }

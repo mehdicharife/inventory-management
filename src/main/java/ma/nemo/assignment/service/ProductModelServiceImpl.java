@@ -28,4 +28,9 @@ public class ProductModelServiceImpl implements ProductModelService {
     public ProductModel saveProductModel(ProductModel productModel) {
         return this.productModelRepository.save(productModel);
     }
+
+    public ProductModel getOrCreateProductModelByProductCode(String productCode) {
+        Optional<ProductModel> optionalProductModel = this.productModelRepository.findByProductCode(productCode);
+        return optionalProductModel.orElse(this.productModelRepository.save(new ProductModel(productCode)));
+    }
 }

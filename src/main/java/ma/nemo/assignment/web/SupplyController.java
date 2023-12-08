@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ma.nemo.assignment.domain.Supply;
 import ma.nemo.assignment.dto.SupplyDto;
 import ma.nemo.assignment.exceptions.SupplyLargerThan500Exception;
+import ma.nemo.assignment.exceptions.SupplyNegativeQuantityException;
 import ma.nemo.assignment.service.SupplyService;
 
 @RestController
@@ -41,6 +42,10 @@ public class SupplyController {
         catch(SupplyLargerThan500Exception exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
         }
+
+        catch(SupplyNegativeQuantityException exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+        }        
         
     }
 }

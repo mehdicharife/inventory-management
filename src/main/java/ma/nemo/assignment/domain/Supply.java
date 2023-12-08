@@ -30,6 +30,14 @@ public class Supply {
   @Temporal(TemporalType.TIMESTAMP)
   private Date supplyDate;
 
+  public Supply() {
+
+  }
+
+  public Supply(ProductModel productModel, Integer quantity) {
+    this.productModel = productModel;
+    this.quantity = quantity;
+  }
 
 
   public Long getSupplyId() {
@@ -72,5 +80,5 @@ public class Supply {
     this.supplyDate = supplyDate;
   }
 
-  // Getters, setters, etc.
+
 }

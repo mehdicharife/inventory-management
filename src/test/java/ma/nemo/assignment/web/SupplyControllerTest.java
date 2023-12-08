@@ -1,8 +1,6 @@
-package ma.nemo.assignment;
+package ma.nemo.assignment.web;
 
-import static org.mockito.Mockito.verify;
 
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -55,7 +53,6 @@ public class SupplyControllerTest {
 
         this.mockMvc.perform(requestBuilder)
             .andExpect(status().isBadRequest());
-
     }
 
     

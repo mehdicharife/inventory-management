@@ -23,6 +23,14 @@ public class ProductModel {
     private Double unitPrice;
   
 
+    public ProductModel() {
+
+    }
+
+    public ProductModel(String productCode) {
+        this.productCode = productCode;
+    }
+    
 
     public Long getId() {
         return this.id;
