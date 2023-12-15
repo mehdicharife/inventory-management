@@ -1,5 +1,3 @@
-Certainly! Here's an updated version of the assignment with a focus on API-first features:
-
 ## Description:
 
 Inventory management is essential for any sales business. In today's digital age, having a robust API-first approach ensures scalability, integration with other systems, and provides a foundation for future digital products.
